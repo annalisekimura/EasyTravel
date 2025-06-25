@@ -57,16 +57,5 @@ function App() {
   )
 }
 
-const buttonStyle = (bgColor) => ({
-  padding: '12px 24px',
-  fontSize: '16px',
-  backgroundColor: bgColor,
-  color: 'white',
-  border: 'none',
-  borderRadius: '8px',
-  cursor: 'pointer',
-  minWidth: '100px',
-  transition: 'background-color 0.3s ease',
-})
 
 export default App
