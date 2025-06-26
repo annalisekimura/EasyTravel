@@ -74,17 +74,17 @@
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
 
-  a:link {
+  .content a:link {
     color: blue;
     font-weight: bolder;
   }
   
   /* visited link */
-  a:visited {
+  .content a:visited {
     color: blue;
   }
   
   /* mouse over link */
-  a:hover {
+  .content a:hover {
     color: white;
   }

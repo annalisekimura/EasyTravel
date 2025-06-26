@@ -10,7 +10,7 @@ function Register() {
     const [error, setError] = useState('')
     const navigate = useNavigate()
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => { //sends form data to Flask
         e.preventDefault()
 
         if (password !== repass) {
@@ -19,7 +19,7 @@ function Register() {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/api/register', { //save info
+            const response = await axios.post('http://localhost:5000/api/register', { //sends data to http://localhost:5000/api/register
                 email,
                 password,
             })

@@ -4,17 +4,17 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db' #sqlalchemy uses local sqlite db named users.db
 app.config['CORS_HEADERS'] = 'Content-type'
 db = SQLAlchemy(app)
 
 from flask_cors import CORS
-CORS(app)
+CORS(app) #enables requests from react frontend
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
+    id = db.Column(db.Integer, primary_key=True) #primary key
+    email = db.Column(db.String(120), unique=True, nullable=False) #must be unique, can't be null
+    password = db.Column(db.String(200), nullable=False) #stores hashed password, not plaintext
 
 @app.route('/api/register', methods=['POST'])
 def register():
@@ -30,7 +30,7 @@ def register():
 
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({"msg": "User registered successfully"}), 201
+    return jsonify({"msg": "User registered successfully"}), 201 #created
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -40,7 +40,7 @@ def login():
 
     user = User.query.filter_by(email=email).first()
     if not user or not check_password_hash(user.password, password):
-        return jsonify({"msg": "Invalid email or password"}), 401
+        return jsonify({"msg": "Invalid email or password"}), 401 #unauthorized
     
     return jsonify({"msg": "Login successful"}), 200
 
