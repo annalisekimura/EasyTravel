@@ -2,14 +2,18 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
+import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db' #sqlalchemy uses local sqlite db named users.db
 app.config['CORS_HEADERS'] = 'Content-type'
 db = SQLAlchemy(app)
 
+RAPIDAPI_KEY = 'e5d3ecf09dmsh7cde719fcdcdaa0p184b48jsnc0e6da6350e4'
+RAPIDAPI_HOST = 'booking-com15.p.rapidapi.com'
+
 from flask_cors import CORS
-CORS(app) #enables requests from react frontend
+CORS(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True) #primary key
@@ -43,6 +47,7 @@ def login():
         return jsonify({"msg": "Invalid email or password"}), 401 #unauthorized
     
     return jsonify({"msg": "Login successful"}), 200
+
 
 
 if __name__ == "__main__":
